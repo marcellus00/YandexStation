@@ -357,6 +357,7 @@ automation:
       media_content_id: '{{ ["На связи", "Смольный слушает", "Тут я"]|random }}'
   mode: single
 ```
+[![Open your Home Assistant instance and show the blueprint import dialog with a specific blueprint pre-filled.](https://my.home-assistant.io/badges/blueprint_import.svg)](https://my.home-assistant.io/redirect/blueprint_import/?blueprint_url=https%3A%2F%2Fgithub.com%2Fmarcellus00%2FYandexStation%2Fblob%2Fblueprints%2Fblueprints%2Fautomation%2Fyandex_station%2Fon_yandex_speaker_event_do_action.yaml)
 
 К сожалению, нельзя узнать фразу, которую сказали колонке. Можно узнать только фразу, которую колонка выполнила или произнесла.
 
