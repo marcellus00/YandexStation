@@ -1,20 +1,31 @@
 blueprint:
-  name: Do something by asking Yandex speaker
-  description: Do Action on Yandex speaker event.
+  name: Получение команды от Станции
+  description: Попросить Алису выполнить действие в Home Assistant.
   domain: automation
-  source_url: https://github.com/home-assistant/core/blob/blueprints/blueprints/automation/yandex_station/on_yandex_speaker_event_do_action.yaml
+  source_url: https://github.com/marcellus00/YandexStation/blob/blueprints/blueprints/automation/yandex_station/on_yandex_speaker_event_do_action.yaml
+  input:
+    phrase:
+      name: Speaker phrase
+      description: Speaker phrase from scenario config.
+      selector:
+        text:
+      default: Сделай громче на 0
+    action:
+      selector:
+        action:
+      default:
+        - service: media_player.play_media
+          target:
+            entity_id: '{{ trigger.event.data.entity_id }}'  # ответить той же колонкой
+          data:
+            media_content_type: text
+            media_content_id: '{{ ["На связи", "Смольный слушает", "Тут я"]|random }}'
 
 alias: Do Action on Yandex speaker event
 trigger:
   - platform: event
     event_type: yandex_speaker
     event_data:
-      value: Сделай громче на 0
-action:
-  - service: media_player.play_media
-    target:
-      entity_id: '{{ trigger.event.data.entity_id }}'
-    data:
-      media_content_type: text
-      media_content_id: '{{ ["На связи", "Смольный слушает", "Тут я"]|random }}'
+      value: !input phrase
+action: !input action
 mode: single
