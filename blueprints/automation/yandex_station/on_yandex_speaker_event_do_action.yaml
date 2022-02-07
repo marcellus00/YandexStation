@@ -1,0 +1,20 @@
+blueprint:
+  name: Do something by asking Yandex speaker
+  description: Do Action on Yandex speaker event.
+  domain: automation
+  source_url: https://github.com/home-assistant/core/blob/blueprints/blueprints/automation/yandex_station/on_yandex_speaker_event_do_action.yaml
+
+alias: Do Action on Yandex speaker event
+trigger:
+  - platform: event
+    event_type: yandex_speaker
+    event_data:
+      value: Сделай громче на 0
+action:
+  - service: media_player.play_media
+    target:
+      entity_id: '{{ trigger.event.data.entity_id }}'
+    data:
+      media_content_type: text
+      media_content_id: '{{ ["На связи", "Смольный слушает", "Тут я"]|random }}'
+mode: single
